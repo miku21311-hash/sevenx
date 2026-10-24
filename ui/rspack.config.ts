@@ -25,7 +25,10 @@ export default defineConfig({
   output: { publicPath: "auto", uniqueName: remote, clean: true },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-    alias: { "~": fileURLToPath(new URL("./src", import.meta.url)) },
+    alias: {
+      "~": fileURLToPath(new URL("./src", import.meta.url)),
+      "@": fileURLToPath(new URL("./src/modules", import.meta.url)),
+    },
   },
   module: {
     rules: [

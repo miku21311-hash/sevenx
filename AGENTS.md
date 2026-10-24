@@ -10,7 +10,7 @@ is the single source of the plugin's identity and ports.
 
 - `npm install`
 - `npm run dev:api` / `npm run dev:ui`
-- `npm run codegen`
+- `npm run test`, `npm run seed`, `npm run schema:print`
 - `npm run check`, `npm run lint`, `npm run build`, `npm run fmt`
 - `docker build --build-arg UI_ENTRY_URL=<remoteEntry.js URL> -t <image> .`
 
@@ -70,12 +70,8 @@ See `docs/erxes-integration.md`. In short:
   the public ingress. See the integration docs before deployment.
 - Every query has loading, error and empty states; refetch or update the
   Apollo cache after each mutation.
-- GraphQL documents are `gql()` from `~/gql` — generated into `ui/src/gql/`
-  by `codegen` from `api/generated/schema.graphql` — written as a function
-  call on a static string with no `${}` interpolation.
-- Apollo hooks infer their types from the document: no `useQuery<T>` or
-  `useMutation<T>` generics and no handwritten response interfaces; derive
-  types from the generated `*Query` types.
-- `api/generated` and `ui/src/gql` are gitignored; `check`, `build` and
-  `dev:ui` run `codegen` first. Run `npm run codegen` after changing a
-  document or the schema.
+- GraphQL documents are `gql` from `@apollo/client`, kept in each module's
+  `graphql/` folder and matching `docs/sevenx-graphql-contract.graphql`.
+- Imports use `~/` for `src/` and `@/` for `src/modules/` (API and UI).
+- `portal/` is a separate Next.js app (React 19, pnpm); keep it out of the npm
+  workspaces, whose overrides pin React 18 for the erxes remote.

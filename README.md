@@ -11,6 +11,7 @@ normalized remote discovery and dashed page-module loading (see integration docs
 | ------ | ------------ | ---------------------------------------------------------------------------------- | -------- |
 | API    | `api`        | Node.js 22, erxes-api-shared startPlugin + tenant-scoped Mongoose models (Node.js) | 3399     |
 | UI     | `ui`         | React 18 Module Federation remote (Rspack), Tailwind CSS                           | 3099     |
+| Portal | `portal`     | Next.js 16 / React 19 student & teacher portal (pnpm, not an npm workspace)        | 3800     |
 | Shared | `erxes.json` | Plugin identity and ports read by both parts                                       |          |
 
 The UI uses erxes's `erxes-ui`/`ui-modules` design system, installed from npm
@@ -26,10 +27,17 @@ npm install
 cp .env.example .env
 npm run dev:api   # registers with the erxes gateway through Redis
 npm run dev:ui    # serves http://localhost:3099/remoteEntry.js
+npm run seed      # optional demo data (needs MONGO_URL)
 ```
 
-`check`, `build` and `dev:ui` run `codegen` first, so the generated GraphQL
-types always match the printed API schema.
+Portal (separate package manager and React version):
+
+```sh
+cd portal && pnpm install && cp .env.sample .env.local && pnpm dev
+```
+
+The GraphQL contract shared by the UI and the portal is
+[docs/sevenx-graphql-contract.graphql](docs/sevenx-graphql-contract.graphql).
 
 In the erxes checkout `.env`, add the plugin and restart the gateway and
 core-api so they pick it up:
@@ -38,7 +46,7 @@ core-api so they pick it up:
 ENABLED_PLUGINS=...,sevenx
 ```
 
-Then open `http://localhost:3001/sevenx` (settings: `/sevenx/settings`).
+Then open `http://localhost:3001/sevenx` (it opens the dashboard).
 Both processes must use the same Redis as erxes; `UI_ENTRY_URL` must be
 reachable by the browser, not merely by the API container. Requests reach the
 API through the gateway (`/graphql`), which forwards the signed-in user and
@@ -51,7 +59,10 @@ a private gateway-only network and strip user/tenant headers at public ingress.
 | ----------------- | ----------------------------------------------- |
 | `npm run dev:api` | API in watch mode                               |
 | `npm run dev:ui`  | UI remote dev server                            |
-| `npm run codegen` | Print the API schema, generate UI GraphQL types |
+| `npm run dev:portal` | Portal dev server (pnpm)                     |
+| `npm run test`    | Jest tests for API and UI                       |
+| `npm run seed`    | Demo data for 7x                                |
+| `npm run schema:print` | Print the API SDL to `api/generated`       |
 | `npm run build`   | Production build of every part                  |
 | `npm run check`   | Type-check every part                           |
 | `npm run lint`    | oxlint                                          |

@@ -3,6 +3,9 @@
   "compilerOptions": {
     "noEmit": false,
     "outDir": "dist",
-    "rootDir": "src"
-  }
+    "rootDir": "src",
+    "types": ["node"]
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts", "src/**/__tests__/**", "src/print-schema.ts"]
 }

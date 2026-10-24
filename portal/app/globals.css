@@ -1,0 +1,266 @@
+@import 'tailwindcss';
+
+/*
+  Design tokens mirror erxes core-ui (frontend/core-ui/src/styles.css) and the
+  erxes-ui theme contract (frontend/libs/erxes-ui/src/theme.css), so the portal
+  reads as part of the same product. Names are kept from the portal's own kit:
+  `muted` is the secondary text color (erxes `muted-foreground`).
+*/
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2102 0.006 285.87);
+  --card: oklch(1 0 0);
+  --sidebar: oklch(0.9848 0 0);
+  --muted: oklch(0.5509 0.0057 17.33);
+  --muted-bg: oklch(0.9619 0 0);
+  --accent: oklch(0.9688 0.0008 286.38);
+  --accent-foreground: oklch(0.7258 0.0074 286.21);
+  --border: oklch(0.9197 0.0041 286.32);
+  --primary: oklch(0.514 0.2276 276.98);
+  --primary-foreground: oklch(0.9848 0 0);
+  --secondary: oklch(0.8372 0.0563 288.17);
+  --danger: oklch(0.6368 0.2078 25.33);
+  --success: oklch(0.7205 0.192 149.49);
+  --warning: oklch(0.7453 0.1322 54.63);
+  --info: oklch(0.6261 0.1859 259.6);
+  --ring: oklch(0.5146 0.2296 277.59);
+  --shadow: oklch(0 0 0 / 5%);
+  --border-shadow: oklch(0 0 0 / 5%);
+  --ease-nav: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-sidebar: var(--sidebar);
+  --color-muted: var(--muted);
+  --color-muted-bg: var(--muted-bg);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* erxes-ui type scale: dense 13px UI text. */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 0.875rem;
+  --text-sm: 0.8125rem;
+  --text-sm--line-height: 1rem;
+  --text-base: 0.875rem;
+  --text-base--line-height: 1.125rem;
+  --text-lg: 1rem;
+  --text-lg--line-height: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.5rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 1.75rem;
+
+  /* erxes-ui layered ring shadows. */
+  --shadow-xs: 0 0 0 1px var(--border-shadow), 0 1px 1px var(--shadow), 0 2px 2px var(--shadow);
+  --shadow-sm:
+    0 0 0 1px var(--border-shadow), 0 1px 1px var(--shadow), 0 2px 2px var(--shadow),
+    0 4px 4px var(--shadow);
+  --shadow-lg:
+    0 0 0 1px var(--border-shadow), 0 1px 1px var(--shadow), 0 2px 2px var(--shadow),
+    0 4px 4px var(--shadow), 0 8px 8px var(--shadow);
+  --shadow-xl:
+    0 0 0 1px var(--border-shadow), 0 1px 1px var(--shadow), 0 2px 2px var(--shadow),
+    0 4px 4px var(--shadow), 0 8px 8px var(--shadow), 0 16px 16px var(--shadow);
+  --shadow-focus: 0 0 0 4px rgb(79 70 229 / 0.25), 0 0 0 1px var(--primary);
+  --shadow-focus-danger: 0 0 0 4px oklch(0.6334 0.2103 25.32 / 25%), 0 0 0 1px var(--danger);
+  --shadow-button-primary: 0 1px 2px #0002, inset 0 1px 0 #ffffff20;
+  --shadow-button-outline: 0 0 0 1px var(--border), 0 1px 2px #00000008;
+  --ease-nav: var(--ease-nav);
+
+  /* Motion follows core-ui navigation: short, eased, mostly opacity. */
+  --animate-page: page-enter 0.16s var(--ease-nav) backwards;
+  --animate-enter: enter 0.22s var(--ease-nav) backwards;
+  --animate-fade: fade 0.15s ease-out backwards;
+  --animate-zoom: zoom-in 0.15s var(--ease-nav) backwards;
+  --animate-sheet: sheet-up 0.25s var(--ease-nav) backwards;
+  --animate-drawer: drawer-in 0.22s var(--ease-nav) backwards;
+  --animate-panel: panel-in 0.22s var(--ease-nav) backwards;
+  --animate-toast: toast-in 0.22s var(--ease-nav) backwards;
+  --animate-shake: shake 0.35s ease backwards;
+  --animate-icon-pop: icon-pop 0.3s var(--ease-nav);
+  --animate-spinner: spinner 0.96s linear infinite;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0.4;
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes shake {
+  20%,
+  60% {
+    transform: translateX(-3px);
+  }
+  40%,
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes icon-pop {
+  40% {
+    transform: scale(1.18);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@layer components {
+  /* Stagger children: style={stagger(i)}. `backwards` fill leaves no transform behind. */
+  .sx-stagger > * {
+    animation: enter 0.22s var(--ease-nav) backwards;
+    animation-delay: calc(var(--i, 0) * 30ms);
+  }
+
+  .sx-skeleton {
+    background: linear-gradient(90deg, var(--accent) 25%, var(--muted-bg) 37%, var(--accent) 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+  }
+
+  /* Primary button sheen from erxes-ui buttonVariants.default. */
+  .sx-btn-sheen::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(to bottom, rgb(255 255 255 / 0.2), transparent);
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .sx-btn-sheen:hover::before {
+    opacity: 1;
+  }
+
+  .styled-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+}
+
+/* The app scrolls inside its own panes; never let the page itself pan or bounce sideways. */
+html,
+body {
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 0.8125rem;
+  font-feature-settings:
+    'rlig' 1,
+    'calt' 1;
+}
+
+*,
+::after,
+::before {
+  border-color: var(--border);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+/*
+  iOS Safari zooms the whole page when a focused field's text is under 16px and
+  stays zoomed, which shifts the layout sideways. Unlayered on purpose so it
+  beats size utilities like text-xs on phones.
+*/
+@media (max-width: 767px) {
+  input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

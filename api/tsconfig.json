@@ -1,16 +1,22 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
+    "module": "commonjs",
+    "moduleResolution": "node10",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+    "noImplicitAny": false,
     "skipLibCheck": true,
     "noEmit": true,
-    "isolatedModules": true,
-    "allowImportingTsExtensions": true,
-    "rewriteRelativeImportExtensions": true,
-    "types": ["node"]
+    "types": ["node", "jest"],
+    "paths": {
+      "~/*": ["./src/*"],
+      "@/*": ["./src/modules/*"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "scripts"]
 }

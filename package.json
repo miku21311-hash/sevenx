@@ -9,10 +9,13 @@
   "type": "module",
   "scripts": {
     "dev:api": "npm run dev -w sevenx_api",
-    "dev:ui": "npm run codegen && npm run dev -w sevenx_ui",
-    "codegen": "npm run schema:print -w sevenx_api && npm run codegen -w sevenx_ui",
-    "build": "npm run codegen && npm run build -w sevenx_api && npm run build -w sevenx_ui",
-    "check": "npm run codegen && npm run check -w sevenx_api && npm run check -w sevenx_ui",
+    "dev:ui": "npm run dev -w sevenx_ui",
+    "dev:portal": "cd portal && pnpm dev",
+    "build": "npm run build -w sevenx_api && npm run build -w sevenx_ui",
+    "check": "npm run check -w sevenx_api && npm run check -w sevenx_ui",
+    "test": "npm test -w sevenx_api && npm test -w sevenx_ui",
+    "seed": "npm run seed -w sevenx_api",
+    "schema:print": "npm run schema:print -w sevenx_api",
     "lint": "oxlint",
     "fmt": "oxfmt"
   },
@@ -26,6 +29,7 @@
     "@opentelemetry/sdk-trace-base": "2.12.0",
     "@sentry/node": "10.76.2",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "mongoose": "8.13.2"
   }
 }

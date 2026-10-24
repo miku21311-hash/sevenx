@@ -1,10 +1,11 @@
 /*
   Tailwind for an erxes UI remote.
 
-  core-ui already ships preflight and its own (unprefixed) utilities. This
-  remote compiles only the utilities it uses, behind the `sevenx:`
-  prefix, so its CSS can never override the host or another plugin. Write
-  classes as `sevenx:flex sevenx:p-6 sevenx:text-muted-foreground`.
+  core-ui already ships preflight and its own utilities, but only the ones
+  core-ui itself uses. The 7x screens were written inside the erxes monorepo
+  with plain (unprefixed) classes, so this remote compiles the unprefixed
+  utilities it uses. They map to the same host tokens below, so a class the
+  host also defines renders identically.
 
   The @theme block below mirrors the erxes-ui theme contract
   (erxes-ui/src/theme.css): it maps utilities to the design tokens the host
@@ -12,7 +13,7 @@
   the host's global stylesheet a second time.
 */
 @layer theme, base, components, utilities;
-@import "tailwindcss/theme.css" layer(theme) prefix(sevenx);
+@import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities) source(none);
 @source "./";
 

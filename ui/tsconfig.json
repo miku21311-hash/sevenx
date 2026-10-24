@@ -4,15 +4,37 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "strict": true,
-    "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
     "noEmit": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "resolveJsonModule": true,
-    "types": ["node"],
-    "paths": { "~/*": ["./src/*"] }
+    "types": [
+      "node",
+      "jest"
+    ],
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ],
+      "~": [
+        "./src"
+      ],
+      "@/*": [
+        "./src/modules/*"
+      ],
+      "@": [
+        "./src/modules"
+      ]
+    }
   },
-  "include": ["src", "rspack.config.ts", "codegen.ts"]
+  "include": [
+    "src",
+    "rspack.config.ts"
+  ]
 }
